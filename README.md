@@ -12,8 +12,9 @@
 - [about asymmetric encryption](https://www.cloudflare.com/es-es/learning/ssl/what-is-asymmetric-encryption/)
 - [node_documentation](https://nodejs.org/docs/latest/api/)
 
-# Instructions
+----
 
+# Instructions
 1. Clone the project in your machine.
 ```shell
 git clone https://github.com/AlfonsoG-dev/encryptionSamplesAPI
@@ -41,6 +42,13 @@ export defatul class Connector() {
     }
 }
 ```
+> for the database you will find a script to build the tables in the **SQL** folder.
+>- you only need to source it in the **mysql server CLI**.
+```shell
+cd ./sql/
+mysql -u root -p
+mysql > surce script.sql;
+```
 4. Run the API.
 ```shell
 npm start
@@ -50,7 +58,7 @@ npm start
 ```http
 GET http://localhost:3000/
 ```
-
+-----
 # Disclaimer
 - This project its for educational purposes.
 - Security issues are not taken into account.
