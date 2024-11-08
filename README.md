@@ -13,6 +13,7 @@
 - [node_documentation](https://nodejs.org/docs/latest/api/)
 - [mysql_CLI_docummentation](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)
 - [mocha_testing_documentation](https://mochajs.org/#getting-started)
+- [assert_documentation](https://www.w3schools.com/nodejs/ref_assert.asp)
 
 ----
 
