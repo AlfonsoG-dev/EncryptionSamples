@@ -1,11 +1,11 @@
-CREATE DATABASE IF NOT EXISTS message_manager;
+CREATE DATABASE IF NOT EXISTS message_manager_test;
 
-USE message_manager;
+USE message_manager_test;
 
 CREATE TABLE IF NOT EXISTS users(
     id_pk INT NOT NULL AUTO_INCREMENT,
-    email TEXT NOT NULL UNIQUE,
-    alias TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL,
+    alias TEXT NOT NULL,
     password TEXT NOT NULL,
     create_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
