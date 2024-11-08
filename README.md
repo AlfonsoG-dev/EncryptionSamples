@@ -15,7 +15,7 @@
 
 ----
 
-# Instructions
+# Install Instructions
 1. Clone the project in your machine.
 ```shell
 git clone https://github.com/AlfonsoG-dev/encryptionSamplesAPI
@@ -54,13 +54,16 @@ export default class DBConfig {
 ```shell
 cd ./sql/
 mysql -u root -p
-mysql > surce script.sql;
+mysql > source script.sql;
 ```
-4. Run the API.
+
+# Usage instructions
+1. Create a user for the API.
+2. Run the API.
 ```shell
 npm start
 ```
-5. Make **HTTP** requests to the API **end-points**.
+3. Make **HTTP** requests to the API **end-points**.
 > the server is running in the port: **3000**
 ```http
 GET http://localhost:3000/
