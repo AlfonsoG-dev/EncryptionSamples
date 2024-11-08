@@ -11,6 +11,7 @@
 - [symmetric_encryption](https://dev.to/superviz/implementing-symmetric-and-asymmetric-encryption-with-nodejs-4efp)
 - [about asymmetric encryption](https://www.cloudflare.com/es-es/learning/ssl/what-is-asymmetric-encryption/)
 - [node_documentation](https://nodejs.org/docs/latest/api/)
+- [mysql_CLI_docummentation](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)
 
 ----
 
@@ -26,19 +27,25 @@ npm i
 3. Configure **database** by  creating the connection file and class using the following example.
 ```js
 import mysql2 from "mysql2"
-export defatul class Connector() {
+import { configDotenv } from "dotenv"
+configDotenv()
+export default class DBConfig {
     db_name
-    constructor(db_name) {
+    constructor(db_name = "") {
         this.db_name = db_name
     }
-    get cursor() {
-        return mysql2.createConnection({
+
+    get config() {
+        return {
             host: "localhost",
             port: "3306",
-            user: "db_user",
-            password: "123asd",
+            user: "test_user",
+            password: process.env.DB_PASSWORD,
             database: this.db_name
-        })
+        }
+    }
+    get cursor() {
+        return mysql2.createConnection(this.config)
     }
 }
 ```
