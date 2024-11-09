@@ -1,13 +1,9 @@
 import mysql2 from "mysql2"
 import { Router } from "express"
 
-import MessageRepository from "../Repositories/MessageRepository.js"
-
 export default class MessageRoute {
     router
-    message_repo
     constructor(cursor = mysql2.createConnection("")) {
-        this.message_repo = new MessageRepository(cursor)
         this.router = Router()
     }
 

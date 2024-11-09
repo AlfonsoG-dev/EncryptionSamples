@@ -10,6 +10,15 @@ export default class MessageRepository {
         this.query_execution = new QueryExecution(cursor)
         this.query_builder = new QueryBuilder("messages")
     }
+    async select_all({limit, offset}) {
+        try {
+            const sql = "SELECT * FROM messages LIMIT ? OFFSET ?"
+            return await this.query_execution.execute_sentence(sql, [limit, offset])
+        } catch(er) {
+            console.error(er)
+            return null
+        }
+    }
     async select(model) {
         try {
             const {sql, values} = this.query_builder.select_query(model)
