@@ -19,7 +19,7 @@ export default class MessageController {
             return res.status(200).json(data_res)
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to get all messages"})
+            return res.status(400).json({error: "[Error] while trying to get all messages"})
         }
     }
     async get_message_by_id(req, res) {
@@ -33,7 +33,7 @@ export default class MessageController {
             return res.status(200).json(data_res)
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to get message by id_pk"})
+            return res.status(400).json({error: "[Error] while trying to get message by id_pk"})
         }
     }
     async get_messages_by_user(req, res) {
@@ -47,7 +47,7 @@ export default class MessageController {
             return res.status(200).json(data_res)
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to get messages by user"})
+            return res.status(400).json({error: "[Error] while trying to get messages by user"})
         }
     }
     async post_message(req, res) {
@@ -61,7 +61,7 @@ export default class MessageController {
             return res.status(200).json({msg: "Message has been inserted"})
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to insert message"})
+            return res.status(400).json({error: "[Error] while trying to insert message"})
         }
     }
 }

@@ -20,7 +20,7 @@ export default class UserController {
             return res.status(200).json(data_res)
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to get all users"})
+            return res.status(400).json({error: "[Error] while trying to get all users"})
         }
     }
     async get_user_by_id(req, res) {
@@ -34,7 +34,7 @@ export default class UserController {
             return res.status(200).json(data_res)
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to get user by id"})
+            return res.status(400).json({error: "[Error] while trying to get user by id"})
         }
     }
     async get_user_by_alias(req, res) {
@@ -48,7 +48,7 @@ export default class UserController {
             return res.status(200).json(data_res)
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to get user by alias"})
+            return res.status(400).json({error: "[Error] while trying to get user by alias"})
         }
     }
     async get_user_by_email(req, res) {
@@ -62,7 +62,7 @@ export default class UserController {
             return res.status(200).json(data_res)
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to get user by email"})
+            return res.status(400).json({error: "[Error] while trying to get user by email"})
         }
     }
     async post_user(req, res) {
@@ -77,7 +77,7 @@ export default class UserController {
             return res.status(200).json({msg: "User has been inserted"})
         } catch(er) {
             console.error(er)
-            return res.status(400).json({error: "[Error]: while trying to insert user"})
+            return res.status(400).json({error: "[Error] while trying to insert user"})
         }
     }
 }
