@@ -14,7 +14,7 @@ export default class EncryptUtils {
      * @param plain_text a text to encrypt.
      * @return the encrypted text.
     */
-    test_encrypt(plain_text="") {
+    symmetric_encrypt(plain_text="") {
         const iv = crypto.randomBytes(16)
         const cipher = crypto.createCipheriv(
             this.algorithm,
@@ -33,7 +33,7 @@ export default class EncryptUtils {
      * @param encrypted_text the text to decrypt.
      * @return the decrypted text. 
     */
-    test_decrypt(encrypted_text="") {
+    symmetric_decrypt(encrypted_text="") {
         const ivPosition = {
             start: 17,
             end: 17 + 32
@@ -58,7 +58,7 @@ const random_text = "147c8ec462c5c2fc6b817148bbbd8a40008f8d968f64b97ab99d32029a9
 
 const n = new EncryptUtils()
 //const en = n.test_encrypt("some random text to encrypt using iv in the text")
-const de = n.test_decrypt(random_text)
+const de = n.symmetric_decrypt(random_text)
 //console.log(n.generate_buffer_bytes(32).toString('hex'))
 console.log({
     de
