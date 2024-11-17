@@ -8,7 +8,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node ./src/App.js"
+    "start": "node ./src/App.js",
+    "test": "mocha"
   },
   "author": "Alfonso Gomajoa",
   "license": "MIT",
