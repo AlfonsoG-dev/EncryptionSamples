@@ -6,8 +6,8 @@ export default class EncryptUtils {
         this.algorithm = 'aes-256-cbc'
         this.secret_key = process.env.SECRET_KEY
     }
-    generate_buffer_bytes(length=0) {
-        return crypto.randomBytes(length)
+    generate_buffer_bytes(length=0, passphrase="") {
+        return crypto.scryptSync(passphrase, 'salt', length)
     }
     /**
      * encrypt text.
@@ -54,12 +54,11 @@ export default class EncryptUtils {
 
     }
 }
-const random_text = "147c8ec462c5c2fc6b817148bbbd8a40008f8d968f64b97ab99d32029a9cdbd5f7d3df3e83e8c2eefdf7ddc92fe328fbbc65e30256558779d5f333f8e0698e4437c1847b872c02d734e9d305449991ec"
+const random_text = "c3239b314367060853f2bdcfb8c9af1c6f3a433f4b98f4b3401971a5261644c730c7b64f72f7926c1cd5d87e09eb1c5b4da50ba558feace6d995c6b4b533baf960a6c10f98eb8018097a8b3407c7c3e8"
 
 const n = new EncryptUtils()
-//const en = n.test_encrypt("some random text to encrypt using iv in the text")
-const de = n.symmetric_decrypt(random_text)
-//console.log(n.generate_buffer_bytes(32).toString('hex'))
-console.log({
-    de
-})
+//const en = n.symmetric_encrypt("some random text to encrypt using iv in the text")
+//console.log(en)
+//const de = n.symmetric_decrypt(random_text)
+//console.log(de)
+//console.log(n.generate_buffer_bytes(32, process.env.PASSPHRASE).toString('hex'))
