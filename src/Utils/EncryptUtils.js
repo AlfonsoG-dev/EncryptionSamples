@@ -3,6 +3,7 @@ import { configDotenv } from "dotenv"
 configDotenv()
 export default class EncryptUtils {
     constructor() {
+        this.iv = process.env.IV
         this.algorithm = 'aes-256-cbc'
         this.secret_key = process.env.SECRET_KEY
     }
@@ -13,6 +14,16 @@ export default class EncryptUtils {
             key: m_key.toString('hex'),
             iv: m_iv.toString('hex')
         }
+    }
+    static_iv_encrypt(plain_text="") {
+        const c = crypto.createCipheriv(
+            this.algorithm,
+            Buffer.from(this.secret_key, 'hex'),
+            Buffer.from(this.iv, 'hex')
+        )
+        let encrypted = c.update(plain_text, 'utf8', 'hex')
+        encrypted += c.final('hex')
+        return encrypted
     }
     /**
      * encrypt text.
@@ -32,6 +43,16 @@ export default class EncryptUtils {
         const part2 = encrypted.slice(17)
 
         return `${part1}${iv.toString('hex')}${part2}`
+    }
+    static_iv_decrypt(encrypted_text="") {
+        const d = crypto.createDecipheriv(
+            this.algorithm,
+            Buffer.from(this.secret_key, 'hex'),
+            Buffer.from(this.iv, 'hex')
+        )
+        let decrypted = d.update(encrypted_text, 'hex', 'utf8')
+        decrypted += d.final('utf8')
+        return decrypted
     }
     /**
      * decrypt text.
@@ -59,3 +80,4 @@ export default class EncryptUtils {
 
     }
 }
+
