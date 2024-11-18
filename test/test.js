@@ -9,7 +9,7 @@ const random__dynamic_iv_ecrypt_text = 'c3239b314367060853f2bdcfb8c9af1c6f3a433f
 
 const random_static_iv_encrypt_text = '19d071f274a6170c593422ea12cafe99409f7322ecaf0eba6eac4de7749af98e22b5a9d1e267ae464c22bb65f0a51c73'
 
-describe('Encrypt/Decrypt', function() {
+describe('Encrypt/Decrypt text', function() {
     it('It should create the key and iv', function() {
         const n = custom_cipher.generate_buffer_bytes(32, process.env.PASSPHRASE)
         assert.equal(Object.keys(n).length, 2)
