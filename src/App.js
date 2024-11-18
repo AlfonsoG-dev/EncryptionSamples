@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors"
 import { configDotenv } from "dotenv"
 configDotenv()
 
@@ -12,6 +13,9 @@ const HOST = process.env.API_HOST
 
 const app = express()
 const cursor = new DBConfig().cursor
+
+app.use(cors())
+app.use(express.json())
 
 app.get("/", (req, res) => {
     res.status(200).json({

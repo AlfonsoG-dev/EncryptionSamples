@@ -8,16 +8,20 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node ./src/App.js",
+    "start": "nodemon ./src/App.js",
     "test": "mocha"
   },
   "author": "Alfonso Gomajoa",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mocha": "^10.8.2",
     "mysql2": "^3.11.4",
     "node-forge": "^1.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

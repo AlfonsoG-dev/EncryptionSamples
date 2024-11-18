@@ -29,8 +29,8 @@ export default class MessageRoute {
     }
 
     post_message() {
-        this.router.post("/post-message", 
-            this.message_controller.post_message(this.message_controller)
+        this.router.post("/post-message",
+            this.message_controller.post_message.bind(this.message_controller)
         )
     }
 

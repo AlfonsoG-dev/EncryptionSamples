@@ -76,7 +76,6 @@ export default class UserController {
         try {
             const data_req = req.body
             assert.notEqual(data_req, undefined)
-            assert.notEqual(Object.keys(data_req), 0)
             const data_res = await this.user_repo.insert(
                 this.global_cipher.get_static_iv_encrypt_model(data_req)
             )

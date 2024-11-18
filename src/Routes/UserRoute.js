@@ -28,12 +28,12 @@ export default class UserRoute {
         )
     }
     get_user_by_email() {
-        this.router.get("/by-email", 
+        this.router.get("/by-email/:email", 
             this.user_controller.get_user_by_email.bind(this.user_controller)
         )
     }
     post_user() {
-        this.router.post("/post-user", 
+        this.router.post("/post-user",
             this.user_controller.post_user.bind(this.user_controller)
         )
     }
