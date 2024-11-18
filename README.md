@@ -1,6 +1,6 @@
 # Encryption test & samples
-- This project server as a template for the encryption applications in a WEB API.
-- The server will be executing simple encryption/decryption of text messages.
+- This project is used as a template for the encryption applications in a WEB API.
+- The server will be performing encrypt/decrypt methods for some kind of text messages.
 
 # Dependencies
 - [node_20.18.0](https://nodejs.org/en/download/package-manager)
@@ -78,7 +78,27 @@ npm start
 3. Make **HTTP** requests to the API **end-points**.
 > the server is running in the port: **3000**
 ```http
-GET http://localhost:3000/
+
+GET http://localhost:3000/user/by-alias/alias
+
+GET http://localhost:3000/message/by-user/1
+
+POST http://localhost:3000/user/post-user
+Content-Type: application/json
+
+{
+    "email": "",
+    "alias": "",
+    "password": ""
+}
+POST http://localhost:3000/message/post-message
+Content-Type: application/json
+
+{
+    "user_id_fk": 1,
+    "head": "",
+    "body": ""
+}
 ```
 4. Execute test.
 ```shell
