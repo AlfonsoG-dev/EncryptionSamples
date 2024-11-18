@@ -30,7 +30,7 @@ export default class MessageRepository {
     }
     async insert(model) {
         try {
-            const {sql, values} = this.query_builder.select_query(model)
+            const {sql, values} = this.query_builder.insert_query(model)
             return await this.query_execution.execute_sentence(sql, values)
         } catch(er) {
             console.error(er)

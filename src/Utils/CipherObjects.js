@@ -80,7 +80,7 @@ export default class CipherObjects {
                 this.dynamic_iv_encrypt_model_data(e)
             }
         } else {
-            this.dynamic_iv_encrypt_model_data(e)
+            this.dynamic_iv_encrypt_model_data(model)
         }
         return model
     }
@@ -91,7 +91,7 @@ export default class CipherObjects {
                 this.dynamic_iv_decrypt_model_data(e)
             }
         } else {
-            this.dynamic_iv_decrypt_model_data(e)
+            this.dynamic_iv_decrypt_model_data(model)
         }
         return model
     }

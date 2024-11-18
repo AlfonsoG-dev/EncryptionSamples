@@ -20,7 +20,7 @@ export default class MessageController {
                 return res.json({error: "Empty set"})
             }
             return res.status(200).json(
-                this.global_cipher.dynamic_iv_decrypt_model_data(data_res)
+                this.global_cipher.get_dynamic_iv_decrypt_model(data_res)
             )
         } catch(er) {
             console.error(er)
@@ -36,7 +36,7 @@ export default class MessageController {
                 return res.json({error: "Not found"})
             }
             return res.status(200).json(
-                this.global_cipher.dynamic_iv_decrypt_model_data(data_res)
+                this.global_cipher.get_dynamic_iv_decrypt_model(data_res)
             )
         } catch(er) {
             console.error(er)
@@ -52,7 +52,7 @@ export default class MessageController {
                 return res.json({error: "Not found"})
             }
             return res.status(200).json(
-                this.global_cipher.dynamic_iv_decrypt_model_data(data_res)
+                this.global_cipher.get_dynamic_iv_decrypt_model(data_res)
             )
         } catch(er) {
             console.error(er)
@@ -64,7 +64,7 @@ export default class MessageController {
             const data_req = req.body
             assert.notEqual(data_req, undefined)
             const data_res = await this.message_repo.insert(
-                this.global_cipher.dynamic_iv_encrypt_model_data(data_req)
+                this.global_cipher.get_dynamic_iv_encrypt_model(data_req)
             )
             if(data_res.affectedRows === 0) {
                 return res.status(409).json({error: "Cannot insert message"})
