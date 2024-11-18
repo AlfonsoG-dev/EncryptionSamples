@@ -20,7 +20,7 @@
 # Install Instructions
 1. Clone the project in your machine.
 ```shell
-git clone https://github.com/AlfonsoG-dev/encryptionSamplesAPI
+git clone https://github.com/AlfonsoG-dev/EncryptionSamples
 ```
 2. Install **node** dependencies.
 ```shell
