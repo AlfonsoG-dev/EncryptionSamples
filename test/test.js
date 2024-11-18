@@ -48,11 +48,32 @@ const dummy_user_model = {
     create_at: new Date('2020-01-10').toLocaleDateString(),
     update_at: new Date('2020-01-10').toLocaleDateString()
 }
+
+const dummy_user_model_enctypted = {
+    email: '9db5467aaae023bb072bff4159c06f14',
+    alias: '5850a740d0e97901964c67f9d54a9872',
+    password: 'b3eb5f8490705052721fd39ad31eae88',
+}
+
 describe('Encrypt/Decrypt model data', function() {
-    it('It Should not encrypt number or date values', function() {
-        const encrypt_model = global_cipher.get_static_iv_encrypt_model(dummy_user_model)
+    const encrypt_model = global_cipher.get_static_iv_encrypt_model(dummy_user_model)
+    it('It should not encrypt number or date values', function() {
         assert.equal(encrypt_model.id_pk, 12)
         assert.equal(encrypt_model.create_at, new Date('2020-01-10').toLocaleDateString())
         assert.equal(encrypt_model.update_at, new Date('2020-01-10').toLocaleDateString())
     })
+    it('It should encrypt string values', function() {
+        // here the dummy_user_model has already been encrypted for the previous test
+        assert.equal(dummy_user_model.email, dummy_user_model_enctypted.email)
+        assert.equal(dummy_user_model.alias, dummy_user_model_enctypted.alias)
+        assert.equal(dummy_user_model.password, dummy_user_model_enctypted.password)
+    })
+    it('It should decrypt encrypt model', function() {
+        // here the dummy_user_model has already been encrypted for the previous test
+        const decrypt_model = global_cipher.get_static_iv_decrypt_model(dummy_user_model_enctypted)
+        assert.equal(decrypt_model.email, 'test@test.com')
+        assert.equal(decrypt_model.alias, 'testing_mine')
+        assert.equal(decrypt_model.password, '123asd')
+    })
 })
+
