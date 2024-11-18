@@ -58,6 +58,16 @@ cd ./sql/
 mysql -u root -p
 mysql > source script.sql;
 ```
+4. Create the environment variables.
+```env
+NODE_ENV='development' -- if you want to test locally otherwise use **production**
+DB_PASSWORD=#database password
+API_PORT='3000' --port for the server
+API_HOST='127.0.0.1' -- IP also you can use **localhost**
+PASSPHRASE=#secure phrase for secret key generation
+SECRET_KEY=#use the encrypt methods to generate
+IV=#use the encrypt methods to generate
+```
 
 # Usage instructions
 1. Create a user for the API.
@@ -69,6 +79,10 @@ npm start
 > the server is running in the port: **3000**
 ```http
 GET http://localhost:3000/
+```
+4. Execute test.
+```shell
+npm run test
 ```
 -----
 # Disclaimer
