@@ -30,7 +30,7 @@ export default class EncryptUtils {
      * @param plain_text a text to encrypt.
      * @return the encrypted text.
     */
-    symmetric_encrypt(plain_text="") {
+    dynamic_iv_encrypt(plain_text="") {
         const iv = crypto.randomBytes(16)
         const cipher = crypto.createCipheriv(
             this.algorithm,
@@ -59,7 +59,7 @@ export default class EncryptUtils {
      * @param encrypted_text the text to decrypt.
      * @return the decrypted text. 
     */
-    symmetric_decrypt(encrypted_text="") {
+    dynamic_iv_decrypt(encrypted_text="") {
         const ivPosition = {
             start: 17,
             end: 17 + 32
