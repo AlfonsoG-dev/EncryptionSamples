@@ -10,7 +10,9 @@ export default class MessageRoute {
         this.router = Router()
         this.message_controller = new MessageController(cursor)
     }
-
+    get_raw_messages() {
+        this.router.get("/all-raw/:limit/:offset", this.message_controller.get_all_raw.bind(this.message_controller))
+    }
     get_messages() {
         this.router.get("/all/:limit/:offset", 
             this.message_controller.get_all.bind(this.message_controller)
@@ -35,6 +37,7 @@ export default class MessageRoute {
     }
 
     get routes() {
+        this.get_raw_messages()
         this.get_messages()
         this.get_message_by_id()
         this.get_messages_by_user()

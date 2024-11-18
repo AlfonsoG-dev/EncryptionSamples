@@ -11,11 +11,25 @@ export default class MessageController {
         this.message_repo = new MessageRepository(cursor)
         this.global_cipher = new CipherObjects()
     }
+    async get_all_raw(req, res) {
+        try {
+            const data_req = req.params
+            assert.notEqual(Object.keys(data_req).length, 0)
+            const data_res = await this.message_repo.select_all(data_req)
+            if(data_res.length === 0) {
+                return res.json({error: "Empty set"})
+            }
+            return res.status(200).json(data_res)
+        } catch(er) {
+            console.error(er)
+            return res.status(400).json({error: "[Error] while trying to get all messages"})
+        }
+    }
     async get_all(req, res) {
         try {
             const data_req = req.params
             assert.notEqual(Object.keys(data_req).length, 0)
-            const data_res = await this.message_repo.select(data_req)
+            const data_res = await this.message_repo.select_all(data_req)
             if(data_res.length === 0) {
                 return res.json({error: "Empty set"})
             }
@@ -46,8 +60,8 @@ export default class MessageController {
     async get_messages_by_user(req, res) {
         try {
             const data_req = req.params
-            assert.notEqual(Object.keys(data_req).length, 0)
-            const data_res = this.message_repo.select(data_req)
+            assert.notEqual(data_req.user_id_fk, undefined)
+            const data_res = await this.message_repo.select(data_req)
             if(data_res.length === 0) {
                 return res.json({error: "Not found"})
             }

@@ -81,8 +81,8 @@ describe('Encrypt/Decrypt model data', function() {
         assert.equal(decrypt_model.password, '123asd')
     })
 })
+// INFO: test the end-points
 const API_URL = 'http://127.0.1:3000'
-// INFO: test end-point usuario
 async function call_api(url, type, body) {
     if(type === 'GET') {
         return await fetch(`${API_URL}${url}`, {
@@ -106,6 +106,8 @@ async function call_api(url, type, body) {
         })
     }
 }
+
+// INFO: test the end-point of user
 describe('User end-point API', function() {
     it('Post user should status should not bee *200*', function(done) {
         done()
@@ -152,6 +154,75 @@ describe('User end-point API', function() {
             .then(res => res.json())
             .then((res) => {
                 assert.equal(res[0].email, 'test@test.com')
+                done()
+            })
+            .catch((er) => {
+                done(er)
+            })
+    })
+})
+
+// INFO: test the end-point of message
+describe('Message end-point API', function() {
+    it('Post message status should be *200*', function(done) {
+        done()
+        /* use when there is no messages
+        const dummy_message = {
+            user_id_fk: 1,
+            head: 'Hello motherr',
+            body: 'this is a random mesage to my mother'
+        }
+        call_api('/message/post-message', 'POST', dummy_message)
+            .then((res) => {
+                assert.equal(res.status, 200)
+                done()
+            })
+            .catch((er) => {
+                done(er)
+            })
+            */
+    })
+    it('Search message by id_pk should return the message', function(done) {
+        call_api('/message/by-id/1', 'GET')
+            .then(res => res.json())
+            .then((res) => {
+                assert.equal(res[0].head, 'Hello motherr')
+                done()
+            })
+            .catch((er) => {
+                done(er)
+            })
+    })
+
+    it('Search message by user should return the message', function(done) {
+        call_api('/message/by-user/1', 'GET')
+            .then(res => res.json())
+            .then((res) => {
+                assert.equal(res[0].head, 'Hello motherr')
+                done()
+            })
+            .catch((er) => {
+                done(er)
+            })
+    })
+    it('Search for all message should return the messages', function(done) {
+        call_api('/message/all/10/0', 'GET')
+            .then(res => res.json())
+            .then((res) => {
+                assert.notEqual(res.length, 0)
+                done()
+            })
+            .catch((er) => {
+                done(er)
+            })
+    })
+
+    it('For the first 2 messages, they must have the same content but different encrypted data', function(done) {
+        call_api('/message/all-raw/2/0', 'GET')
+            .then(res => res.json())
+            .then((res) => {
+                assert.notEqual(res[0].head, res[1].head)
+                assert.notEqual(res[0].body, res[1].body)
                 done()
             })
             .catch((er) => {
