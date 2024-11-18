@@ -17,7 +17,17 @@ export default class CipherObjects {
             }
         }
     }
-
+    static_iv_decrypt_model_data(model) {
+        if(!(model instanceof Object)) {
+            throw new Error("Non object provided")
+        }
+        const keys = Object.keys(model)
+        for(let k of keys) {
+            if(!this.ignore_keys.includes(k) && model[k] !== null) {
+                model[k] = this.encrypt.static_iv_decrypt(model[k])
+            }
+        }
+    }
     get_static_iv_encrypt_model(model) {
         if(model instanceof Array) {
             for(let e of model) {
@@ -25,6 +35,17 @@ export default class CipherObjects {
             }
         } else {
             this.static_iv_encrypt_model_data(model)
+        }
+        return model
+    }
+
+    get_static_iv_decrypt_model(model) {
+        if(model instanceof Array) {
+            for(let e of model) {
+                this.static_iv_decrypt_model_data(e)
+            }
+        } else {
+            this.static_iv_decrypt_model_data(model)
         }
         return model
     }
