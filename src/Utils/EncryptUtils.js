@@ -1,11 +1,31 @@
-import crypto from "crypto"
+import crypto, {privateDecrypt, publicEncrypt} from "crypto"
 import { configDotenv } from "dotenv"
 configDotenv()
 export default class EncryptUtils {
     constructor() {
         this.iv = process.env.IV
         this.algorithm = 'aes-256-cbc'
+        this.asymmetric_algorithm = 'rsa'
         this.secret_key = process.env.SECRET_KEY
+    }
+    generate_asymmetric_key_pairs(passphrase="") {
+        const {publicKey, privateKey } = crypto.generateKeyPairSync(this.asymmetric_algorithm, {
+            modulusLength: 4096,
+            publicKeyEncoding: {
+                type: "spki",
+                format: "pem"
+            },
+            privateKeyEncoding: {
+                type: "pkcs8",
+                format: "pem",
+                cipher: this.algorithm,
+                passphrase: passphrase
+            }
+        })
+        return {
+            publicKey,
+            privateKey
+        }
     }
     generate_buffer_bytes(length=0, passphrase="") {
         const m_key = crypto.scryptSync(passphrase, 'salt', length)
@@ -44,6 +64,15 @@ export default class EncryptUtils {
 
         return `${part1}${iv.toString('hex')}${part2}`
     }
+    asymmetric_encrypt(plain_text="", public_key) {
+        return publicEncrypt(public_key, Buffer.from(plain_text, 'utf8')).toString('base64')
+    }
+    asymmetric_decrypt(encrypted_text="", private_key, passphrase) {
+        return privateDecrypt({
+            key: private_key,
+            passphrase
+        }, Buffer.from(encrypted_text, 'base64')).toString('utf8')
+    }
     static_iv_decrypt(encrypted_text="") {
         const d = crypto.createDecipheriv(
             this.algorithm,
@@ -80,4 +109,12 @@ export default class EncryptUtils {
 
     }
 }
+// INFO: for test case
 
+const n = new EncryptUtils()
+const passphrase = 'thisis a ramdompassphrase'
+const {publicKey, privateKey} = n.generate_asymmetric_key_pairs(passphrase)
+const e = n.asymmetric_encrypt('hellow mother', publicKey)
+console.log(`encrypted text: \n${e}\n`)
+const d = n.asymmetric_decrypt(e, privateKey, passphrase)
+console.log(`decrypted text: \n${d}\n`)
