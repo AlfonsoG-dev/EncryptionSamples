@@ -7,7 +7,7 @@ const global_cipher = new CipherObjects()
 
 // INFO: test encrypt text class
 
-const random__dynamic_iv_ecrypt_text = 'c3239b314367060853f2bdcfb8c9af1c6f3a433f4b98f4b3401971a5261644c730c7b64f72f7926c1cd5d87e09eb1c5b4da50ba558feace6d995c6b4b533baf960a6c10f98eb8018097a8b3407c7c3e8'
+const random__dynamic_iv_encrypt_text = 'c3239b314367060853f2bdcfb8c9af1c6f3a433f4b98f4b3401971a5261644c730c7b64f72f7926c1cd5d87e09eb1c5b4da50ba558feace6d995c6b4b533baf960a6c10f98eb8018097a8b3407c7c3e8'
 
 const random_static_iv_encrypt_text = '19d071f274a6170c593422ea12cafe99409f7322ecaf0eba6eac4de7749af98e22b5a9d1e267ae464c22bb65f0a51c73'
 
@@ -25,14 +25,14 @@ describe('Encrypt/Decrypt text', function() {
     })
     it('It should decrypt the data provided', function() {
         assert.equal(
-            custom_cipher.dynamic_iv_decrypt(random__dynamic_iv_ecrypt_text),
+            custom_cipher.dynamic_iv_decrypt(random__dynamic_iv_encrypt_text),
             'some random text to encrypt using iv in the text'
         )
     })
     it('Using static iv it should encrypt the data provided', function() {
         assert.notEqual(
-            custom_cipher.static_iv_encrypt('soma random text to encrypt using statis iv'),
-            'some random text to encrypt using statis iv'
+            custom_cipher.static_iv_encrypt('soma random text to encrypt using static iv'),
+            'some random text to encrypt using static iv'
         )
     })
     it('Using static iv it should decrypt the data provided', function() {
@@ -54,7 +54,7 @@ const dummy_user_model = {
     update_at: new Date('2020-01-10').toLocaleDateString()
 }
 
-const dummy_user_model_enctypted = {
+const dummy_user_model_encrypted = {
     email: '9db5467aaae023bb072bff4159c06f14',
     alias: '5850a740d0e97901964c67f9d54a9872',
     password: 'b3eb5f8490705052721fd39ad31eae88',
@@ -69,13 +69,13 @@ describe('Encrypt/Decrypt model data', function() {
     })
     it('It should encrypt string values', function() {
         // here the dummy_user_model has already been encrypted for the previous test
-        assert.equal(dummy_user_model.email, dummy_user_model_enctypted.email)
-        assert.equal(dummy_user_model.alias, dummy_user_model_enctypted.alias)
-        assert.equal(dummy_user_model.password, dummy_user_model_enctypted.password)
+        assert.equal(dummy_user_model.email, dummy_user_model_encrypted.email)
+        assert.equal(dummy_user_model.alias, dummy_user_model_encrypted.alias)
+        assert.equal(dummy_user_model.password, dummy_user_model_encrypted.password)
     })
     it('It should decrypt encrypt model', function() {
         // here the dummy_user_model has already been encrypted for the previous test
-        const decrypt_model = global_cipher.get_static_iv_decrypt_model(dummy_user_model_enctypted)
+        const decrypt_model = global_cipher.get_static_iv_decrypt_model(dummy_user_model_encrypted)
         assert.equal(decrypt_model.email, 'test@test.com')
         assert.equal(decrypt_model.alias, 'testing_mine')
         assert.equal(decrypt_model.password, '123asd')
@@ -169,8 +169,8 @@ describe('Message end-point API', function() {
         /* use when there is no messages
         const dummy_message = {
             user_id_fk: 1,
-            head: 'Hello motherr',
-            body: 'this is a random mesage to my mother'
+            head: 'Hello mother',
+            body: 'this is a random message to my mother'
         }
         call_api('/message/post-message', 'POST', dummy_message)
             .then((res) => {
@@ -186,7 +186,7 @@ describe('Message end-point API', function() {
         call_api('/message/by-id/1', 'GET')
             .then(res => res.json())
             .then((res) => {
-                assert.equal(res[0].head, 'Hello motherr')
+                assert.equal(res[0].head, 'Hello mother')
                 done()
             })
             .catch((er) => {
@@ -198,7 +198,7 @@ describe('Message end-point API', function() {
         call_api('/message/by-user/1', 'GET')
             .then(res => res.json())
             .then((res) => {
-                assert.equal(res[0].head, 'Hello motherr')
+                assert.equal(res[0].head, 'Hello mother')
                 done()
             })
             .catch((er) => {
