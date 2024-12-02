@@ -19,7 +19,7 @@ app.use(express.json())
 
 app.get("/", (req, res) => {
     res.status(200).json({
-        msg: "Hellow motherr",
+        msg: "Hello Mother",
         ips: req.ip,
         valid_db_connection: cursor.authorized
     })

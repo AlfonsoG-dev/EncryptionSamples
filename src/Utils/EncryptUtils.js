@@ -110,7 +110,7 @@ export default class EncryptUtils {
     }
 }
 // INFO: for test case
-
+/*
 const n = new EncryptUtils()
 const passphrase = 'thisis a ramdompassphrase'
 const {publicKey, privateKey} = n.generate_asymmetric_key_pairs(passphrase)
@@ -118,3 +118,4 @@ const e = n.asymmetric_encrypt('hellow mother', publicKey)
 console.log(`encrypted text: \n${e}\n`)
 const d = n.asymmetric_decrypt(e, privateKey, passphrase)
 console.log(`decrypted text: \n${d}\n`)
+*/
