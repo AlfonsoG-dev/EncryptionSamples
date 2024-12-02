@@ -11,7 +11,7 @@
 - [symmetric_encryption](https://dev.to/superviz/implementing-symmetric-and-asymmetric-encryption-with-nodejs-4efp)
 - [about asymmetric encryption](https://www.cloudflare.com/es-es/learning/ssl/what-is-asymmetric-encryption/)
 - [node_documentation](https://nodejs.org/docs/latest/api/)
-- [mysql_CLI_docummentation](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)
+- [mysql_CLI_documentation](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)
 - [mocha_testing_documentation](https://mochajs.org/#getting-started)
 - [assert_documentation](https://www.w3schools.com/nodejs/ref_assert.asp)
 
@@ -33,15 +33,15 @@ import { configDotenv } from "dotenv"
 configDotenv()
 export default class DBConfig {
     db_name
-    constructor(db_name = "") {
-        this.db_name = db_name
+    constructor() {
+        this.db_name = "database_name"
     }
 
     get config() {
         return {
             host: "localhost",
             port: "3306",
-            user: "test_user",
+            user: "",
             password: process.env.DB_PASSWORD,
             database: this.db_name
         }
