@@ -78,9 +78,11 @@ npm start
 3. Make **HTTP** requests to the API **end-points**.
 > the server is running in the port: **3000**
 ```http
+GET http://localhost:3000/user/all/10/0
 
 GET http://localhost:3000/user/by-alias/alias
 
+GET http://localhost.3000/message/all/10/0
 GET http://localhost:3000/message/by-user/1
 
 POST http://localhost:3000/user/post-user
